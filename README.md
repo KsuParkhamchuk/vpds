@@ -1,71 +1,82 @@
-# vpds README
+## Approach and technical choices
+**The plan:**
 
-This is the README for your extension "vpds". After writing up a brief description, we recommend including the following sections.
+1. Come up with a list of critical mvp features
+2. Decide on the best format for usability (web app/extension)
+3. Create a couple of designes (MVP and extended view)
+4. Fill the gaps (check how to create basic extension)
+5. Implement
 
-## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+**Technical choices:**
 
-For example if there is an image subfolder under your extension project workspace:
+1. React application built with Vite
+_Reason_: 
 
-\!\[feature X\]\(images/feature-x.png\)
+- no need for server side rendering for the VS Code extension
+- Vite is much more performant (optimized production builds, uses ES modules by default, fast hot realoading)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+2. Bun package manager
 
-## Requirements
+- performance
+- all-in-one toolkit
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+3. Extension format
 
-## Extension Settings
+I consider the extension to be the best way from the UX perspective, it is integrated into your workflow and it takes you 1-2 clicks to open it and start working
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## UI/UX
 
-For example:
+The extension was create in a form of a chat window, with a form to submit a prompt and a chat window to display the response.
 
-This extension contributes the following settings:
+Some basic features include:
+1. Disabling a submit button while waiting for the response
+2. Creating a new chat
+3. Copy the generated code snippet
+4. Parsing markdown
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Check all designes [here](https://www.figma.com/design/S04uLs3Iw4mDwPVM8Lc713/Visa?node-id=0-1&t=3AD9YeKaxKjR3Pf2-1)
 
-## Known Issues
+![image]("mvp.png")
+![image]("./images/extended.png")
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
-## Release Notes
+## Assumptions and shortcuts
 
-Users appreciate release notes as you update your extension.
+1. The server response is a markdown string (most frequent LLM output)
+2. Server responses are hardcoded
+3. Only dark theme is supported
 
-### 1.0.0
+## Use of AI
 
-Initial release of ...
+1. Used to write a function for link replacement inside of an index.html (frontend build) for smooth integration with a webView(extension component)
+2. Proposed using startTransition while dispatching a form action that cleans the state
+3. Adviced a good approach for debugging the extension
 
-### 1.0.1
+## Running the extension
 
-Fixed issue #.
+1. Install dependencies inside vpds folder:
 
-### 1.1.0
+```
+bun install
+```
 
-Added features X, Y, and Z.
+2. Install dependencies inside vpdsui folder:
 
----
+``` cd vpdsui
+    bun install
+```
 
-## Following extension guidelines
+3. Build React frontend:
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+```cd ../
+   bun run build-ui 
+```
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+4. Compile the extension:
 
-## Working with Markdown
+``` 
+bun compile 
+```
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+5. Run extension in a debug mode (F5 or Fn + F5)
