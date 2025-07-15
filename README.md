@@ -37,8 +37,13 @@ Some basic features include:
 
 Check all designes [here](https://www.figma.com/design/S04uLs3Iw4mDwPVM8Lc713/Visa?node-id=0-1&t=3AD9YeKaxKjR3Pf2-1)
 
-![image]("mvp.png")
-![image]("./images/extended.png")
+MVP:
+
+![image](./images/mvp.png)
+
+Extended:
+
+![image](./images/extended.png)
 
 
 ## Assumptions and shortcuts
@@ -46,6 +51,14 @@ Check all designes [here](https://www.figma.com/design/S04uLs3Iw4mDwPVM8Lc713/Vi
 1. The server response is a markdown string (most frequent LLM output)
 2. Server responses are hardcoded
 3. Only dark theme is supported
+
+## Next steps
+
+1. Chat and Edit mode ("edit" mode allows project edits)
+2. Multimodality or integrating Figma mcp. Help model to understand the context better
+3. Syntax highlighting
+4. Chat history
+5. Proper prompting (for better structured outputs)
 
 ## Use of AI
 
